@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -56,7 +58,7 @@ public class AdminController {
     @GetMapping("/admin/{id}/edit")
     public String editUser(Model model,@PathVariable("id") int id) {
         model.addAttribute("user", userService.showUser(id));
-        model.addAttribute("allRoles",userService.index());
+        model.addAttribute("allRoles",roleService.index());
         return "edit";
     }
 
@@ -65,7 +67,7 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
-        userService.saveUser(user);
+        userService.updateUser(id, user);
         return "redirect:/admin";
     }
 

@@ -14,87 +14,86 @@
 </head>
 <body>
 
-  <!--  верхняя полоса-->
+<!--  верхняя полоса-->
 
-    <div class="container-fluid table-dark">
-        <div class="row">
-            <div class="col-11 text-left text-light">
-                <p style="margin: 10px auto">
-                    <span class="h6" th:text="${user.getUsername()}"></span>
-                    <span>with roles:</span>
-                    <span>
+<div class="container-fluid table-dark">
+    <div class="row">
+        <div class="col-11 text-left text-light">
+            <p style="margin: 10px auto">
+                <span class="h6" th:text="${user.getUsername()}"></span>
+                <span>with roles:</span>
+                <span>
                         <th:block th:each="role : ${user.roles}">
                         <a th:text="${#strings.substringAfter(role.authority, 'ROLE_')}">roles</a>
                         </th:block>
                     </span>
-                </p>
-            </div>
-            <div class="col-1 text-right">
-                <p style="margin: 10px auto"><a href="/" style="color: #aaaaaa">Logout</a></p>
-            </div>
+            </p>
+        </div>
+        <div class="col-1 text-right">
+            <p style="margin: 10px auto"><a href="/" style="color: #aaaaaa">Logout</a></p>
         </div>
     </div>
+</div>
 
-  <!--  Кнопка user слева-->
+<!--  Кнопка user слева-->
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2 px-2" style="padding-top: 20px; padding-left: 0px; padding-right: 0px; height: 100vh">
-                <button class="text-left btn btn-primary" style="height: 40px; width: 240px;">User</button>
-            </div>
-            <!--Информация о юзере-->
-            <div class="col-10 color1 px-4">
-                <p style="top: 20px">
-                <h1>User information-page</h1>
-                </p>
-                <div class="color1 rounded" style="border: darkgrey solid 1px;">
-                    <div style="height: 50px">
-                        <H5 class="color1"
-                            style="position:relative; height: 30px; width: 200px; right: -20px; top: 10px">
-                            About user</H5>
-                    </div>
-                    <div class="container-fluid table-light">
-                        <div style="height: 150px">
-                            <div class="row" style="border-top: darkgrey solid 1px; height: 130px;">
-                                <div class="col-12">
-                                    <table class="table table-striped">
-                                        <thead>
-                                        <th>ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Age</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        </thead>
-                                        <tbody>
-                                        <div style="border-top: darkgrey solid 1px; margin-top: 20px;">
-                                            <p style="margin-top: -20px;">
-                                            <td>
-                                                <span th:text="${user.getId()}"/>
-                                            </td>
-                                            <td>
-                                                <span th:text="${user.getFirstName()}"/>
-                                            </td>
-                                            <td>
-                                                <span th:text="${user.getLastName()}"/>
-                                            </td>
-                                            <td>
-                                                <span th:text="${user.getAge()}"/>
-                                            </td>
-                                            <td>
-                                                <span th:text="${user.getUsername()}"/>
-                                            </td>
-                                            <td>
-                                                <th:block th:each="role : ${user.roles}">
-                                                    <a th:text="${#strings.substringAfter(role.authority, 'ROLE_')}">roles</a>
-                                                </th:block>
-                                            </td>
-                                            </p>
-                                        </div>
-                                        </tbody>
-                                    </table>
-                                    <br>
-                                </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 px-2" style="padding-top: 20px; padding-left: 0px; padding-right: 0px; height: 100vh">
+            <button class="text-left btn btn-primary" style="height: 40px; width: 240px;">User</button>
+        </div>
+        <!--Информация о юзере-->
+        <div class="col-10 color1 px-4">
+            <p style="top: 20px">
+            <h1>User information-page</h1>
+            </p>
+            <div class="color1 rounded" style="border: darkgrey solid 1px;">
+                <div style="height: 50px">
+                    <H5 class="color1"
+                        style="position:relative; height: 30px; width: 200px; right: -20px; top: 10px">
+                        About user</H5>
+                </div>
+                <div class="container-fluid table-light">
+                    <div style="height: 150px">
+                        <div class="row" style="border-top: darkgrey solid 1px; height: 130px;">
+                            <div class="col-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    </thead>
+                                    <tbody>
+                                    <div style="border-top: darkgrey solid 1px; margin-top: 20px;">
+                                        <p style="margin-top: -20px;">
+                                        <td>
+                                            <span th:text="${user.getId()}"/>
+                                        </td>
+                                        <td>
+                                            <span th:text="${user.getFirstName()}"/>
+                                        </td>
+                                        <td>
+                                            <span th:text="${user.getLastName()}"/>
+                                        </td>
+                                        <td>
+                                            <span th:text="${user.getAge()}"/>
+                                        </td>
+                                        <td>
+                                            <span th:text="${user.getUsername()}"/>
+                                        </td>
+                                        <td>
+                                            <th:block th:each="role : ${user.roles}">
+                                                <a th:text="${#strings.substringAfter(role.authority, 'ROLE_')}">roles</a>
+                                            </th:block>
+                                        </td>
+                                        </p>
+                                    </div>
+                                    </tbody>
+                                </table>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -102,6 +101,7 @@
             </div>
         </div>
     </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -113,3 +113,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+
