@@ -25,35 +25,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/").hasAnyRole("VALENOK","ADMIN","USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
+                .formLogin()
+                .loginPage("/")
+                .usernameParameter("email")
+                .failureUrl("/?error")
+                .successHandler(successUserHandler)
                 .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .logout().logoutSuccessUrl("/")
+                .permitAll();
     }
-
-
-//     In Memory
-//    @Bean
-//    public UserDetailsService users() {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password("{bcrypt}$2a$12$sw97tUPqzXmrTCQL2oaDaukNzxUX5jqKQrF.3pzOvhlfKRvzd.b3u")
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password("{bcrypt}$2a$12$sw97tUPqzXmrTCQL2oaDaukNzxUX5jqKQrF.3pzOvhlfKRvzd.b3u")
-//                .roles("ADMIN", "USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user,admin);
-//
-//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
