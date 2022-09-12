@@ -5,18 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/admin")
 public class AdminController {
 
     private UserService userService;
@@ -26,11 +24,7 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
-    @GetMapping("/")
-    public String getLogin() {
-        return "login";
-    }
-    @GetMapping("/admin")
+    @GetMapping("")
     public String getAllUsers(Model model, Principal principal) {
         User user1 = new User();
         model.addAttribute("newUser", user1);
@@ -41,12 +35,12 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/admin/{id}")
+    @GetMapping("/{id}")
     public String showUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.showUser(id));
         return "show";
     }
-    @PostMapping("/admin/new")
+    @PostMapping("/new")
     public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "new";
@@ -55,23 +49,23 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editUser(Model model,@PathVariable("id") int id) {
         model.addAttribute("user", userService.showUser(id));
         model.addAttribute("allRoles",roleService.index());
         return "edit";
     }
 
-    @PatchMapping("/admin/{id}")
+    @PatchMapping("/{id}")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
-        userService.updateUser(id, user);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/admin";

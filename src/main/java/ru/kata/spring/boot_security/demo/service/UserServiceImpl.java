@@ -9,16 +9,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,40 +32,35 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
-
-    private final UserDao userDao;
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public List<User> index() {
-        return userDao.index();
+        return userRepository.findAll();
     }
 
     @Override
     public User showUser(int id) {
-        return userDao.showUser(id);
+        User user = null;
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isPresent()) {
+            user = optional.get();
+        }
+        return user;
     }
 
     @Override
     @Transactional
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDao.saveUser(user);
+        userRepository.save(user);
     }
-
-    @Override
-    @Transactional
-    public void updateUser(int id, User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDao.updateUser(id,user);
-    }
-
     @Override
     @Transactional
     public void deleteUser(int id) {
-        userDao.deleteUser(id);
+        userRepository.deleteById(id);
     }
 
     @Override

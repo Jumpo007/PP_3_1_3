@@ -52,32 +52,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
-
-//    @Bean
-//    public JdbcUserDetailsManager user(DataSource dataSource) {
-
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password("{bcrypt}$2a$12$sw97tUPqzXmrTCQL2oaDaukNzxUX5jqKQrF.3pzOvhlfKRvzd.b3u")
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password("{bcrypt}$2a$12$sw97tUPqzXmrTCQL2oaDaukNzxUX5jqKQrF.3pzOvhlfKRvzd.b3u")
-//                .roles("ADMIN", "USER")
-//                .build();
-//
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-//        if(jdbcUserDetailsManager.userExists(user.getUsername())) {
-//            jdbcUserDetailsManager.deleteUser(user.getUsername());
-//        }
-//        if(jdbcUserDetailsManager.userExists(admin.getUsername())) {
-//            jdbcUserDetailsManager.deleteUser(admin.getUsername());
-//        }
-//        jdbcUserDetailsManager.createUser(user);
-//        jdbcUserDetailsManager.createUser(admin);
-//        return jdbcUserDetailsManager;
-//    }
-
 }

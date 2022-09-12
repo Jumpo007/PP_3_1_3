@@ -12,8 +12,6 @@ public interface UserService {
 
     void saveUser(User user);
 
-    void updateUser(int id, User user);
-
     void deleteUser(int id);
 
     public User findUserByUsername(String username);
